@@ -1,20 +1,13 @@
-<<<<<<< HEAD
-# shopping_app_interface
+# Shopping App Interface - Flutter
 
-A new Flutter project.
+This project demonstrates a simplified shopping app interface using Flutter. The app features a main screen with multiple sections: displaying products, hot offers, and recently purchased products. The UI is responsive and utilizes widgets such as `PageView`, `GridView`, and `ListView` to showcase product items and hot offers.
 
-## Getting Started
+## Features
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# shopping_app_interface
->>>>>>> f10acfe6aed4700642862c419c8f3d515604039b
+1. **AppBar**: A title bar with the name "Shopping App."
+2. **Product Section**:
+   - A heading "Our Products" followed by a `PageView` that shows images of products.
+3. **GridView**: Displays products in two columns with an image, text, and an "Add to Cart" icon. Tapping the icon displays a Snackbar with a confirmation message.
+4. **Hot Offers**:
+   - A heading "Hot Offers" followed by a `ListView` with horizontal scrolling that lists 5 items. Each item displays an image and description.
+5. **Responsive Design**: The layout adjusts based on screen size using `MediaQuery`.
