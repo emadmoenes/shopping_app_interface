@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shopping_app_interface/widgets/shoppingScreen.dart';
+import 'package:shopping_app_interface/widgets/SignUp_Screen.dart';
+import 'package:shopping_app_interface/widgets/shopping_Screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,8 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      home: ShoppingScreen(),
+      title: 'Shopping App',
+      initialRoute: '/signup',
+      routes: {
+        '/signup': (context) => SignUpScreen(),
+        '/shopping': (context) => ShoppingScreen(),
+      },
     );
   }
 }
