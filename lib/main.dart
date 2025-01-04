@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shopping_app_interface/widgets/SignUp_Screen.dart';
-import 'package:shopping_app_interface/widgets/shopping_Screen.dart';
+import 'package:shopping_app_interface/widgets/shoppingScreen.dart';
 
 void main() {
   runApp(const MyApp());
