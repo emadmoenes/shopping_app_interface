@@ -1,6 +1,7 @@
 # Shopping App Interface - Flutter
 
 This project demonstrates a simplified shopping app interface using Flutter. The app features a main screen with multiple sections: displaying products, hot offers, and recently purchased products. The UI is responsive and utilizes widgets such as `PageView`, `GridView`, and `ListView` to showcase product items and hot offers. includes a SignUp page with form validation and navigation to a Shopping screen.
+We enhanced the user experience by adding `fade-out and fade-in animations` between the `SignUp page` and the `Shopping page`.
 
 ## Features
 
@@ -20,3 +21,14 @@ This project demonstrates a simplified shopping app interface using Flutter. The
    - Confirm password validation (must match the password)
    - Success dialog and error snackbar messages
    - Navigation to the Shopping screen after successful signup
+
+7. **ADD ANIMATIONS**:
+   **Fade-Out Animation on SignUp Page**:
+
+   - When the user clicks the "OK" button in the success dialog, the SignUp page fades out smoothly.
+   - This was achieved using the `flutter_animate` package and an `AnimationController`.
+
+   **Fade-In Animation on Shopping Page**:
+
+   - After the SignUp page fades out, the Shopping page fades in with a smooth transition.
+   - This was implemented using `PageRouteBuilder` and the `flutter_animate` package.

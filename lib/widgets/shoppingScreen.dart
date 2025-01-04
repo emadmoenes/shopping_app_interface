@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_app_interface/components/hot_Offer_Card.dart';
 import 'package:shopping_app_interface/components/product_card.dart';
@@ -113,6 +114,6 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
           ),
         ),
       ),
-    );
+    ).animate().fadeIn(duration: 500.ms);
   }
 }

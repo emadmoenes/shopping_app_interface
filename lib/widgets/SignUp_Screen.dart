@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
@@ -14,7 +15,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _fullNameController = TextEditingController();
-
+// add state variable to control fade-out animation
+  bool _isFadingOut = false;
 // add method to sign up user
   void _signUp() {
     if (_formKey.currentState!.validate()) {
@@ -33,8 +35,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     TextButton(
                         onPressed: () {
                           Navigator.pop(context);
-
-                          Navigator.pushReplacementNamed(context, '/shopping');
+                          // ADD animation for fading out the screen
+                          setState(() {
+                            _isFadingOut = true;
+                            print(
+                                "Fade-out animation triggered: $_isFadingOut");
+                          });
+                          Future.delayed(100.ms, () {
+                            Navigator.pushReplacementNamed(
+                                context, '/shopping');
+                          });
                         },
                         child: Text(
                           "OK",
@@ -220,6 +230,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
           ),
         ],
       ),
-    );
+    ).animate(target: _isFadingOut ? 1 : 0).fadeOut(duration: 500.ms);
   }
 }
