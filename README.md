@@ -2,6 +2,7 @@
 
 This project demonstrates a simplified shopping app interface using Flutter. The app features a main screen with multiple sections: displaying products, hot offers, and recently purchased products. The UI is responsive and utilizes widgets such as `PageView`, `GridView`, and `ListView` to showcase product items and hot offers. includes a SignUp page with form validation and navigation to a Shopping screen.
 We enhanced the user experience by adding `fade-out and fade-in animations` between the `SignUp page` and the `Shopping page`.
+We added `localization support` to the app using JSON files (`en-US.json` and `ar-EG.json`). This allows the app to display text in `English` or `Arabic` dynamically. A language switch button in the `AppBar` lets users toggle between languages without restarting the app.
 
 ## Features
 
@@ -32,3 +33,17 @@ We enhanced the user experience by adding `fade-out and fade-in animations` betw
 
    - After the SignUp page fades out, the Shopping page fades in with a smooth transition.
    - This was implemented using `PageRouteBuilder` and the `flutter_animate` package.
+
+8. **Localization Support**:
+   **Localized Strings**:
+
+   - All text in the app is loaded from JSON files based on the selected locale.
+   - Supported languages: English (`en-US`) and Arabic (`ar-EG`).
+
+   **Language Switch Button**:
+
+   - Added an `IconButton` to the `AppBar` to toggle between English and Arabic.
+
+   **Dynamic Updates**:
+
+   - The app updates all text dynamically when the language is changed.

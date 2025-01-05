@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:shopping_app_interface/components/hot_Offer_Card.dart';
+import 'package:shopping_app_interface/components/hot_offer_card.dart';
 import 'package:shopping_app_interface/components/product_card.dart';
+import 'package:shopping_app_interface/srvices/localization_service.dart';
 
-// this is the shopping screen widget
 class ShoppingScreen extends StatefulWidget {
+  final Function(Locale) changeLocale;
+  const ShoppingScreen({super.key, required this.changeLocale});
+
   @override
   _ShoppingScreenState createState() => _ShoppingScreenState();
 }
@@ -13,14 +16,16 @@ class ShoppingScreen extends StatefulWidget {
 class _ShoppingScreenState extends State<ShoppingScreen> {
   @override
   Widget build(BuildContext context) {
-    // Get the screen width and height
-    // using MediaQuery.of(context).size.width and MediaQuery.of(context).size.height
+    final l10n =
+        Localizations.of<LocalizationService>(context, LocalizationService)!;
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Shopping App',
+          l10n.translate('appTitle'),
           style: TextStyle(
               color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
         ),
@@ -31,8 +36,19 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
             bottom: Radius.circular(20),
           ),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.language, color: Colors.white),
+            onPressed: () {
+              final newLocale =
+                  Localizations.localeOf(context).languageCode == 'ar'
+                      ? const Locale('en', 'US')
+                      : const Locale('ar', 'EG');
+              widget.changeLocale(newLocale);
+            },
+          ),
+        ],
       ),
-      // use SingleChildScrollView to make sure the content is scrollable
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -42,7 +58,7 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'Our Products',
+                  l10n.translate('ourProducts'),
                   style: GoogleFonts.poppins(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -51,7 +67,7 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
               ),
               Container(
                 height: screenHeight * 0.25,
-                //use PageView to display images in a carousel
+                // Use PageView to display images in a carousel
                 child: PageView(
                   children: [
                     Image.asset('assets/images/product1.png',
@@ -67,14 +83,14 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'Products for Sale',
+                  l10n.translate('productsForSale'),
                   style: GoogleFonts.poppins(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-              //use GridView to display products in a grid view with fixed cross axis count and child aspect ratio
+              // Use GridView to display products in a grid view
               GridView.builder(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
@@ -93,7 +109,7 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
-                  'Hot Offers',
+                  l10n.translate('hotOffers'),
                   style: GoogleFonts.poppins(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -101,15 +117,16 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
                 ),
               ),
               Container(
-                  height: screenHeight * 0.3,
-                  //use ListView to display hot offers in a horizontal list
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 5,
-                    itemBuilder: (context, index) {
-                      return HotOfferCard();
-                    },
-                  )),
+                height: screenHeight * 0.3,
+                // Use ListView to display hot offers in a horizontal list
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 5,
+                  itemBuilder: (context, index) {
+                    return HotOfferCard();
+                  },
+                ),
+              ),
             ],
           ),
         ),

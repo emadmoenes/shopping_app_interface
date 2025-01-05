@@ -1,0 +1,18 @@
+{
+  "appTitle": "Shopping App",
+  "signUp": "Sign Up",
+  "fullName": "Full Name",
+  "email": "Email",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "successTitle": "Success",
+  "successMessage": "Your account has been created successfully!",
+  "ok": "OK",
+  "validationFullName": "Full name is required",
+  "validationEmail": "Email is required",
+  "validationPassword": "Password is required",
+  "validationConfirmPassword": "Confirm password is required",
+  "ourProducts": "Our Products",
+  "productsForSale": "Products for Sale",
+  "hotOffers": "Hot Offers"
+}

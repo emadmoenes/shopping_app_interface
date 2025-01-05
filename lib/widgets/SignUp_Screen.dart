@@ -1,66 +1,80 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:shopping_app_interface/srvices/localization_service.dart';
 
 class SignUpScreen extends StatefulWidget {
-  const SignUpScreen({super.key});
+  // here we get the changeLocale function from the parent widget
+  final Function(Locale) changeLocale;
+  const SignUpScreen({super.key, required this.changeLocale});
 
   @override
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  // add controllers for form fields
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _fullNameController = TextEditingController();
-// add state variable to control fade-out animation
+
   bool _isFadingOut = false;
-// add method to sign up user
+
   void _signUp() {
     if (_formKey.currentState!.validate()) {
       showDialog(
-          context: context,
-          builder: (context) => AlertDialog(
-                  backgroundColor: Colors.black.withOpacity(0.6),
-                  title: Text("Success",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold)),
-                  content: Text("Your account has been created successfully!",
-                      style: TextStyle(color: Colors.white, fontSize: 18)),
-                  actions: [
-                    TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                          // ADD animation for fading out the screen
-                          setState(() {
-                            _isFadingOut = true;
-                            print(
-                                "Fade-out animation triggered: $_isFadingOut");
-                          });
-                          Future.delayed(100.ms, () {
-                            Navigator.pushReplacementNamed(
-                                context, '/shopping');
-                          });
-                        },
-                        child: Text(
-                          "OK",
-                          style: TextStyle(color: Colors.white, fontSize: 20),
-                        ))
-                  ]));
+        context: context,
+        builder: (context) {
+          final l10n = Localizations.of<LocalizationService>(
+              context, LocalizationService)!;
+          return AlertDialog(
+            backgroundColor: Colors.black.withOpacity(0.6),
+            title: Text(
+              l10n.translate('successTitle'),
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 28,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            content: Text(
+              l10n.translate('successMessage'),
+              style: const TextStyle(color: Colors.white, fontSize: 18),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  setState(() {
+                    _isFadingOut = true;
+                  });
+                  Future.delayed(100.ms, () {
+                    Navigator.pushReplacementNamed(context, '/shopping');
+                  });
+                },
+                child: Text(
+                  l10n.translate('ok'),
+                  style: const TextStyle(color: Colors.white, fontSize: 20),
+                ),
+              ),
+            ],
+          );
+        },
+      );
     } else {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(SnackBar(content: Text("Please enter valid details")));
+      final l10n =
+          Localizations.of<LocalizationService>(context, LocalizationService)!;
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(l10n.translate('validationFullName'))),
+      );
     }
   }
 
-// add validation methods for form fields
   String? _validateEmail(String? value) {
+    final l10n =
+        Localizations.of<LocalizationService>(context, LocalizationService)!;
     if (value == null || value.isEmpty) {
-      return "Email is required";
+      return l10n.translate('validationEmail');
     }
     if (!value.contains("@") || !value.contains(".")) {
       return "Please enter a valid email address must contain '@' and '.'";
@@ -69,19 +83,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   String? _validatePassword(String? value) {
+    final l10n =
+        Localizations.of<LocalizationService>(context, LocalizationService)!;
     if (value == null || value.isEmpty) {
-      return "Password is required";
+      return l10n.translate('validationPassword');
     }
     if (value.length < 6) {
       return "Password must be at least 6 characters long";
     }
-
     return null;
   }
 
   String? _validateConfirmPassword(String? value) {
+    final l10n =
+        Localizations.of<LocalizationService>(context, LocalizationService)!;
     if (value == null || value.isEmpty) {
-      return "Confirm password is required";
+      return l10n.translate('validationConfirmPassword');
     }
     if (value != _passwordController.text) {
       return "Passwords do not match";
@@ -90,8 +107,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   String? _validateFullName(String? value) {
+    final l10n =
+        Localizations.of<LocalizationService>(context, LocalizationService)!;
     if (value == null || value.isEmpty) {
-      return "Full name is required";
+      return l10n.translate('validationFullName');
     }
     if (value[0] != value[0].toUpperCase()) {
       return "Full name must start with an uppercase letter";
@@ -101,12 +120,42 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n =
+        Localizations.of<LocalizationService>(context, LocalizationService)!;
+
     return Scaffold(
       backgroundColor: Colors.transparent,
+      appBar: AppBar(
+        title: Text(
+          l10n.translate('appTitle'),
+          style: TextStyle(
+              color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        backgroundColor: Colors.black.withOpacity(0.7),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(20),
+          ),
+        ),
+        actions: [
+          // this action button will change the language of the app
+          IconButton(
+            icon: const Icon(Icons.language, color: Colors.white),
+            onPressed: () {
+              final newLocale =
+                  Localizations.localeOf(context).languageCode == 'ar'
+                      ? const Locale('en', 'US')
+                      : const Locale('ar', 'EG');
+              widget.changeLocale(newLocale);
+            },
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               image: DecorationImage(
                 image: AssetImage('assets/images/background.jpg'),
                 fit: BoxFit.cover,
@@ -133,9 +182,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     child: Column(
                       children: [
                         const SizedBox(height: 20),
-                        const Text(
-                          'Sign Up',
-                          style: TextStyle(
+                        Text(
+                          l10n.translate('signUp'),
+                          style: const TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
                             color: Colors.black87,
@@ -145,7 +194,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         TextFormField(
                           controller: _fullNameController,
                           decoration: InputDecoration(
-                            labelText: 'Full Name',
+                            labelText: l10n.translate('fullName'),
                             filled: true,
                             fillColor: Colors.white.withOpacity(0.6),
                             border: OutlineInputBorder(
@@ -159,7 +208,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         TextFormField(
                           controller: _emailController,
                           decoration: InputDecoration(
-                            labelText: 'Email',
+                            labelText: l10n.translate('email'),
                             filled: true,
                             fillColor: Colors.white.withOpacity(0.6),
                             border: OutlineInputBorder(
@@ -173,7 +222,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         TextFormField(
                           controller: _passwordController,
                           decoration: InputDecoration(
-                            labelText: 'Password',
+                            labelText: l10n.translate('password'),
                             filled: true,
                             fillColor: Colors.white.withOpacity(0.6),
                             border: OutlineInputBorder(
@@ -188,7 +237,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         TextFormField(
                           controller: _confirmPasswordController,
                           decoration: InputDecoration(
-                            labelText: 'Confirm Password',
+                            labelText: l10n.translate('confirmPassword'),
                             filled: true,
                             fillColor: Colors.white.withOpacity(0.6),
                             border: OutlineInputBorder(
@@ -213,9 +262,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
-                          child: const Text(
-                            'Sign Up',
-                            style: TextStyle(
+                          child: Text(
+                            l10n.translate('signUp'),
+                            style: const TextStyle(
                               fontSize: 18,
                               color: Colors.white,
                             ),

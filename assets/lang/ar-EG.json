@@ -1,0 +1,18 @@
+{
+  "appTitle": "تطبيق التسوق",
+  "signUp": "تسجيل",
+  "fullName": "الاسم الكامل",
+  "email": "البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "confirmPassword": "تأكيد كلمة المرور",
+  "successTitle": "نجاح",
+  "successMessage": "تم إنشاء حسابك بنجاح!",
+  "ok": "موافق",
+  "validationFullName": "الاسم الكامل مطلوب",
+  "validationEmail": "البريد الإلكتروني مطلوب",
+  "validationPassword": "كلمة المرور مطلوبة",
+  "validationConfirmPassword": "تأكيد كلمة المرور مطلوب",
+  "ourProducts": "منتجاتنا",
+  "productsForSale": "المنتجات المعروضة للبيع",
+  "hotOffers": "العروض الساخنة"
+}
