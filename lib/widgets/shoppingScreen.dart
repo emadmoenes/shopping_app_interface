@@ -24,6 +24,7 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Text(
           l10n.translate('appTitle'),
           style: TextStyle(
