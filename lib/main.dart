@@ -7,6 +7,7 @@ import 'package:shopping_app_interface/views/widgets/SignUp_Screen.dart';
 import 'package:shopping_app_interface/views/widgets/shoppingScreen.dart';
 
 Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
