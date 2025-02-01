@@ -3,7 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:shopping_app_interface/components/hot_offer_card.dart';
 import 'package:shopping_app_interface/components/product_card.dart';
-import 'package:shopping_app_interface/srvices/localization_service.dart';
+import 'package:shopping_app_interface/services/localization_service.dart';
 
 class ShoppingScreen extends StatefulWidget {
   final Function(Locale) changeLocale;

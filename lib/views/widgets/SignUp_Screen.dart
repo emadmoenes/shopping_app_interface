@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:shopping_app_interface/srvices/localization_service.dart';
+import 'package:shopping_app_interface/services/localization_service.dart';
 
 class SignUpScreen extends StatefulWidget {
   // here we get the changeLocale function from the parent widget
